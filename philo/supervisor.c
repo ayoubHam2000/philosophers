@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:32:05 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 18:33:49 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/12 19:59:08 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static int	is_min_eating_done(t_philo *philo, size_t *min_eating)
 {
-	if (!(philo->flag))
+	if (!(philo->flag) && philo->nbr_eat == philo->args->nbr_time_to_eat)
 	{
 		philo->flag = 1;
 		(*min_eating)++;
 	}
-	if (*min_eating == philo->args->nbr_time_to_eat)
+	if (*min_eating == philo->args->nb_philo)
 		return (1);
 	return (0);
 }
@@ -33,17 +33,17 @@ void	*supervisor_thread(void *p)
 
 	philos = p;
 	id = 0;
-	pause_time = (1 * 1000) / (philos->args->nb_philo);
+	pause_time = (50);
 	while (1)
 	{
-		//printf("%zu, %zu, %zu\n",id, get_time(), philos[id].t_last_meal);
 		if ((get_time() - philos[id].t_last_meal) > philos->args->time_to_die \
 			&& !philos[id].is_eating)
 		{
 			print_status(philos + id, DIED);
 			return (NULL);
 		}
-		if (philos->args->nbr_time_to_eat != (size_t)(-1) && is_min_eating_done(philos + id, &min_eating))
+		if (philos->args->nbr_time_to_eat != (size_t)(-1) && \
+			is_min_eating_done(philos + id, &min_eating))
 		{
 			return (NULL);
 		}

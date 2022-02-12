@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:53:08 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 17:35:56 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/12 20:12:21 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <math.h>
 # include <unistd.h>
 # include <sys/time.h>
 
@@ -61,6 +60,5 @@ void		put_str(const char *str);
 void		help(void);
 int			check_args(int ac, char **av, t_args *args);
 size_t		get_time();
-void		ft_usleep(size_t time);
 
 #endif

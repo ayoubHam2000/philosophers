@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_usleep.c                                        :+:      :+:    :+:   */
+/*   print_status.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/12 17:30:24 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 18:08:43 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/02/12 15:34:08 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/02/12 19:53:44 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-static size_t	get_time_micro()
+void	print_status(t_philo *philo, const char *status)
 {
-	struct timeval	t;
+	static size_t			old;
+	static pthread_mutex_t	print;
 
-	gettimeofday(&t, NULL);
-	return (t.tv_sec * 1000000 + t.tv_usec);
-}
-
-void	ft_usleep(size_t time)
-{
-	size_t	t1;
-	size_t	t2;
-
-	t1 = get_time_micro();
-	//printf("%zu, %zu, %zu, %zu\n", t1, t2, time, time - t2);
-	usleep(time);
-	t2 = get_time_micro() - t1;
-	printf("%zu\n", t2);
-	//t2 = t2 - time; 
+	if (!old)
+	{
+		old = get_time();
+		pthread_mutex_init(&print, NULL);
+	}
+	pthread_mutex_lock(&print);
+	printf("%lu %zu %s\n", get_time() - old, philo->id, status);
+	pthread_mutex_unlock(&print);
 }

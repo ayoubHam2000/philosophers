@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 09:56:09 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 18:32:27 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/12 20:16:56 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ static size_t	left_fork(size_t i, size_t nbp)
 	if (!i)
 		return (nbp - 1);
 	return (i - 1);
+}
+
+pid_t	process(int i, t_philo_info	info)
+{
+	pid_t	k;
+
+	k = fork();
+	if (!k)
+	{
+		socrate(i, info);
+		usleep(100);
+		exit(0);
+	}
+	return (k);
 }
 
 t_philo	*init_philos(t_args *args)
@@ -38,7 +52,7 @@ t_philo	*init_philos(t_args *args)
 		philos[i].is_eating = 0;
 		philos[i].nbr_eat = 0;
 		philos[i].flag = 0;
-		philos[i].t_last_meal = get_time();
+		philos[i].t_last_meal = 0;
 		philos[i].m_fork1 = m_forks + left_fork(i, args->nb_philo);
 		philos[i].m_fork2 = m_forks + i;
 	}

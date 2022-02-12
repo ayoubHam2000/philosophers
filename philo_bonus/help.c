@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_status.c                                     :+:      :+:    :+:   */
+/*   help.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/12 15:34:08 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 17:18:48 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/02/12 09:54:41 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/02/12 09:54:52 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	print_status(t_philo *philo, const char *status)
+void	help(void)
 {
-	static size_t			old;
-	static pthread_mutex_t	print;
-
-	if (!old)
-	{
-		old = get_time();
-		pthread_mutex_init(&print, NULL);
-	}
-	pthread_mutex_lock(&print);
-	printf("%lu ms %zu %s\n", get_time() - old, philo->id, status);
-	pthread_mutex_unlock(&print);
+	put_str("\nError\n./philo <number_of_philosophers>");
+	put_str(" <time_to_die> <time_to_eat> ");
+	put_str("<time_to_sleep> [number_of_times_each_philosopher_must_eat]\n\n");
+	exit(0);
 }
