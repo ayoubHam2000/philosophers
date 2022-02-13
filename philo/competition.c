@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 13:18:34 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 19:58:36 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/13 15:56:49 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*philo_thread(void *p)
 		pthread_mutex_unlock(philo->m_fork1);
 		pthread_mutex_unlock(philo->m_fork2);
 		usleep(philo->args->time_to_sleep * 1000 - 2000);
-		print_status(philo, THINKING);	
+		print_status(philo, THINKING);
 	}
 }
 

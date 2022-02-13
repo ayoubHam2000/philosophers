@@ -6,7 +6,7 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/11 17:50:17 by aben-ham          #+#    #+#              #
-#    Updated: 2022/02/12 20:10:45 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/02/13 15:56:21 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ FILES = \
 	check_args.c \
 	competition.c \
 	ft_atoi.c \
-	ft_put_str.c \
 	get_time.c \
 	help.c \
 	init_philos.c \

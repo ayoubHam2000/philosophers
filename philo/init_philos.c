@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 09:56:09 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 20:00:10 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/13 15:57:28 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_philo	*init_philos(t_args *args)
 {
 	size_t			i;
 	t_philo			*philos;
-	pthread_mutex_t *m_forks;
+	pthread_mutex_t	*m_forks;
 
 	philos = malloc(args->nb_philo * sizeof(t_philo));
 	m_forks = malloc(sizeof(pthread_mutex_t) * (args->nb_philo));
