@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_str.c                                       :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/11 20:09:31 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 15:59:59 by aben-ham         ###   ########.fr       */
+/*   Created: 2022/02/13 13:53:16 by aben-ham          #+#    #+#             */
+/*   Updated: 2022/02/13 15:46:41 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "philosopher_bonus.h"
 
-void	put_str(const char *str)
+void	ft_error(void)
 {
-	while (*str)
-		write(1, str++, 1);
+	printf("Error\n");
+	exit(EXIT_FAILD);
 }

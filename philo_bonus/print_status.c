@@ -6,23 +6,20 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:34:08 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 19:53:44 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/13 14:36:24 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "philosopher_bonus.h"
 
-void	print_status(t_philo *philo, const char *status)
+void	print_status(t_philo *philo, const char *status, int stop)
 {
-	static size_t			old;
-	static pthread_mutex_t	print;
+	static size_t	old;
 
 	if (!old)
-	{
-		old = get_time();
-		pthread_mutex_init(&print, NULL);
-	}
-	pthread_mutex_lock(&print);
+		old = philo->t_last_meal;
+	sem_wait(philo->sem_print);
 	printf("%lu %zu %s\n", get_time() - old, philo->id, status);
-	pthread_mutex_unlock(&print);
+	if (!stop)
+		sem_post(philo->sem_print);
 }

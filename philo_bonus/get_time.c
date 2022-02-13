@@ -6,13 +6,13 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 13:28:14 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 13:31:48 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/13 15:54:00 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "philosopher_bonus.h"
 
-size_t	get_time()
+size_t	get_time(void)
 {
 	struct timeval	t;
 

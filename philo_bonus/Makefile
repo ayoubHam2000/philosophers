@@ -6,23 +6,22 @@
 #    By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/12 20:11:08 by aben-ham          #+#    #+#              #
-#    Updated: 2022/02/12 20:11:27 by aben-ham         ###   ########.fr        #
+#    Updated: 2022/02/13 15:44:39 by aben-ham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FILES = \
 	check_args.c \
-	competition.c \
 	ft_atoi.c \
-	ft_put_str.c \
 	get_time.c \
 	help.c \
-	init_philos.c \
 	print_status.c \
-	supervisor.c \
+	ft_error.c \
+	philo_process.c \
+	start_competition.c \
 	main.c
 
-CFLAGS =  -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror  -I.
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = philo_bonus

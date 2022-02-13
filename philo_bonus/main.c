@@ -6,17 +6,33 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:52:26 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 17:27:35 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/13 15:52:27 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "philosopher_bonus.h"
+
+static void	start(t_args *args)
+{
+	sem_t	*sem_forks;
+	sem_t	*sem_print;
+
+	sem_unlink(SEM_PRINT);
+	sem_unlink(SEM_FORKS);
+	sem_forks = sem_open(SEM_FORKS, O_CREAT, 0600, args->nb_philo);
+	sem_print = sem_open(SEM_PRINT, O_CREAT, 0600, 1);
+	if (sem_forks == SEM_FAILED || sem_print == SEM_FAILED)
+		ft_error();
+	start_competition(*args);
+	if (sem_close(sem_forks) != 0 || sem_close(sem_print) != 0)
+		ft_error();
+	if (sem_unlink(SEM_FORKS) != 0 || sem_unlink(SEM_PRINT) != 0)
+		ft_error();
+}
 
 int	main(int ac, char **av)
 {
 	t_args		*args;
-	t_philo		*philos;
-	pthread_t	*supervisor;
 
 	args = malloc(sizeof(t_args));
 	if (!args)
@@ -25,14 +41,7 @@ int	main(int ac, char **av)
 		help();
 	if (!args->nb_philo || !args->nbr_time_to_eat)
 		return (0);
-	philos = init_philos(args);
-	if (!philos)
-		return (0);
-	if (!start_competition(philos))
-		return (0);
-	supervisor = start_supervisor(philos);
-	if (!supervisor)
-		return (0);
-	pthread_join(*supervisor, NULL);
+	start(args);
+	free(args);
 	return (0);
 }

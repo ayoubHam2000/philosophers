@@ -6,11 +6,11 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 09:54:10 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 16:27:17 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/13 10:00:01 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "philosopher_bonus.h"
 
 int	check_args(int ac, char **av, t_args *args)
 {
