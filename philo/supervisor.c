@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 15:32:05 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/12 19:59:08 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:00:36 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*supervisor_thread(void *p)
 		if ((get_time() - philos[id].t_last_meal) > philos->args->time_to_die \
 			&& !philos[id].is_eating)
 		{
-			print_status(philos + id, DIED);
+			print_status(philos + id, DIED, 1);
 			return (NULL);
 		}
 		if (philos->args->nbr_time_to_eat != (size_t)(-1) && \

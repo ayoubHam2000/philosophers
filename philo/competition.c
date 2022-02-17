@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 13:18:34 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/13 15:56:49 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:03:52 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ void	*philo_thread(void *p)
 	while (1)
 	{
 		pthread_mutex_lock(philo->m_fork1);
-		print_status(philo, TAKEN_A_FORK);
+		print_status(philo, TAKEN_A_FORK, 0);
 		pthread_mutex_lock(philo->m_fork2);
-		print_status(philo, TAKEN_A_FORK);
-		print_status(philo, EATING);
+		print_status(philo, TAKEN_A_FORK, 0);
+		print_status(philo, EATING, 0);
 		philo->is_eating = 1;
 		philo->t_last_meal = get_time();
 		usleep(philo->args->time_to_eat * 1000 - 2000);
 		philo->is_eating = 0;
 		philo->nbr_eat++;
-		print_status(philo, SLEEPING);
+		print_status(philo, SLEEPING, 0);
 		pthread_mutex_unlock(philo->m_fork1);
 		pthread_mutex_unlock(philo->m_fork2);
 		usleep(philo->args->time_to_sleep * 1000 - 2000);
-		print_status(philo, THINKING);
+		print_status(philo, THINKING, 0);
 	}
 }
 

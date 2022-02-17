@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 17:53:08 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/13 15:57:10 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:00:29 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			start_competition(t_philo *philos);
 pthread_t	*start_supervisor(t_philo *philos);
 void		*philo_thread(void *p);
 void		*supervisor_thread(void *p);
-void		print_status(t_philo *philo, const char *status);
+void		print_status(t_philo *philo, const char *status, int end);
 
 //utils
 int			ft_atoi(const char *str);

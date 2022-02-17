@@ -6,7 +6,7 @@
 /*   By: aben-ham <aben-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 13:52:02 by aben-ham          #+#    #+#             */
-/*   Updated: 2022/02/13 15:50:50 by aben-ham         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:06:25 by aben-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	kill_children(int *pids, int len, int status)
 	}
 	if (status == EXIT_FAILD)
 		ft_error();
-	system("leaks philo_bonus");
 	exit(0);
 }
 
