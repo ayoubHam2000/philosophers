@@ -15,15 +15,11 @@
 void	print_status(t_philo *philo, const char *status, int end)
 {
 	static size_t			old;
-	static pthread_mutex_t	print;
 
+	pthread_mutex_lock(philo->print);
 	if (!old)
-	{
 		old = get_time();
-		pthread_mutex_init(&print, NULL);
-	}
-	pthread_mutex_lock(&print);
 	printf("%lu %zu %s\n", get_time() - old, philo->id, status);
 	if (!end)
-		pthread_mutex_unlock(&print);
+		pthread_mutex_unlock(philo->print);
 }

@@ -12,24 +12,35 @@
 
 #include "philosopher.h"
 
+void	eating(t_philo *philo)
+{
+	print_status(philo, EATING, 0);
+	pthread_mutex_lock(philo->critical_section);
+	philo->is_eating = 1;
+	philo->t_last_meal = get_time();
+	pthread_mutex_unlock(philo->critical_section);
+	usleep(philo->args->time_to_eat * 1000 - 2000);
+	pthread_mutex_lock(philo->critical_section);
+	philo->is_eating = 0;
+	philo->nbr_eat++;
+	pthread_mutex_unlock(philo->critical_section);
+}
+
 void	*philo_thread(void *p)
 {
 	t_philo	*philo;
 
 	philo = p;
+	pthread_mutex_lock(philo->critical_section);
 	philo->t_last_meal = get_time();
+	pthread_mutex_unlock(philo->critical_section);
 	while (1)
 	{
 		pthread_mutex_lock(philo->m_fork1);
 		print_status(philo, TAKEN_A_FORK, 0);
 		pthread_mutex_lock(philo->m_fork2);
 		print_status(philo, TAKEN_A_FORK, 0);
-		print_status(philo, EATING, 0);
-		philo->is_eating = 1;
-		philo->t_last_meal = get_time();
-		usleep(philo->args->time_to_eat * 1000 - 2000);
-		philo->is_eating = 0;
-		philo->nbr_eat++;
+		eating(philo);
 		print_status(philo, SLEEPING, 0);
 		pthread_mutex_unlock(philo->m_fork1);
 		pthread_mutex_unlock(philo->m_fork2);

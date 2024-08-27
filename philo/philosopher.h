@@ -44,6 +44,8 @@ typedef struct philo
 	int				flag;
 	pthread_mutex_t	*m_fork1;
 	pthread_mutex_t	*m_fork2;
+	pthread_mutex_t *critical_section;
+	pthread_mutex_t *print;
 }	t_philo;
 
 //code

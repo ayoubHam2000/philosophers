@@ -30,23 +30,29 @@ void	*supervisor_thread(void *p)
 	size_t	min_eating;
 	int		pause_time;
 	size_t	id;
+	int f_break;
 
 	philos = p;
 	id = 0;
 	pause_time = (50);
 	while (1)
 	{
+		f_break = 0;
+		pthread_mutex_lock(philos[id].critical_section);
 		if ((get_time() - philos[id].t_last_meal) > philos->args->time_to_die \
 			&& !philos[id].is_eating)
 		{
 			print_status(philos + id, DIED, 1);
-			return (NULL);
+			f_break = 1;
 		}
-		if (philos->args->nbr_time_to_eat != (size_t)(-1) && \
+		else if (philos->args->nbr_time_to_eat != (size_t)(-1) && \
 			is_min_eating_done(philos + id, &min_eating))
 		{
-			return (NULL);
+			f_break = 1;
 		}
+		pthread_mutex_unlock(philos[id].critical_section);
+		if (f_break == 1)
+			return (NULL);
 		id = (id + 1) % (philos->args->nb_philo);
 		usleep(pause_time);
 	}

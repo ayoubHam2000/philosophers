@@ -51,9 +51,9 @@ typedef struct philo
 	size_t	nbr_eat;
 	size_t	t_last_meal;
 	t_args	args;
-	int		is_eating;
 	sem_t	*sem_forks;
 	sem_t	*sem_print;
+	sem_t *sem_critical_sec;
 }	t_philo;
 
 //code

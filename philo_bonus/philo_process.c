@@ -19,12 +19,13 @@ static void	*supervisor_thread(void *p)
 	philo = p;
 	while (1)
 	{
-		if ((get_time() - philo->t_last_meal) > philo->args.time_to_die \
-			&& !philo->is_eating)
+		sem_wait(philo->sem_critical_sec);
+		if ((get_time() - philo->t_last_meal) > philo->args.time_to_die)
 		{
 			print_status(philo, DIED, 1);
 			exit(EXIT_DEAD);
 		}
+		sem_post(philo->sem_critical_sec);
 		usleep(200);
 	}
 }
@@ -48,16 +49,19 @@ static t_philo	*init_philo(int id, t_args *args)
 	sem_print = sem_open(SEM_PRINT, 0);
 	if (sem_forks == SEM_FAILED || sem_print == SEM_FAILED)
 		exit(EXIT_FAILD);
-	philo = malloc(sizeof(philo));
-	if (!philo)
+	philo = malloc(sizeof(t_philo));
+	philo->sem_critical_sec = malloc(sizeof(sem_t));
+	if (!philo || !philo->sem_critical_sec)
+		exit(EXIT_FAILD);
+	if (sem_init(philo->sem_critical_sec, 0, 1) != 0)
 		exit(EXIT_FAILD);
 	philo->id = id + 1;
-	philo->is_eating = 0;
 	philo->nbr_eat = 0;
 	philo->t_last_meal = get_time();
 	philo->args = *args;
 	philo->sem_forks = sem_forks;
 	philo->sem_print = sem_print;
+ 	
 	return (philo);
 }
 
@@ -81,10 +85,10 @@ void	philo_process(int id, t_args args)
 		sem_wait(philo->sem_forks);
 		print_status(philo, TAKEN_A_FORK, 0);
 		print_status(philo, EATING, 0);
-		philo->is_eating = 1;
+		sem_wait(philo->sem_critical_sec);
 		philo->t_last_meal = get_time();
 		usleep(philo->args.time_to_eat * 1000 - 1000);
-		philo->is_eating = 0;
+		sem_post(philo->sem_critical_sec);
 		philo->nbr_eat++;
 		if (philo->nbr_eat == philo->args.nbr_time_to_eat)
 			kla_bzaf(philo);

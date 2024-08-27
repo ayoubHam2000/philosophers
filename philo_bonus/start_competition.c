@@ -30,10 +30,8 @@ static void	waiting(int *pids, int nbr_children)
 	int	pid;
 	int	status;
 	int	exit_status;
-	int	nb_min_eat;
 
 	pid = waitpid(0, &status, WUNTRACED | WCONTINUED);
-	nb_min_eat = 0;
 	while (pid != -1)
 	{
 		exit_status = ((status >> 8) & 0xff);
@@ -60,7 +58,6 @@ void	start_competition(t_args args)
 		if (pids[i] == -1)
 		{
 			kill_children(pids, i, EXIT_FAILD);
-			ft_error();
 		}
 		if (!pids[i])
 		{

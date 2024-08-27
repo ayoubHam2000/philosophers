@@ -21,7 +21,8 @@ FILES = \
 	supervisor.c \
 	main.c
 
-CFLAGS =  -Wall -Wextra -Werror
+# -fsanitize=thread -lpthread
+CFLAGS =  -Wall -Wextra -Werror  
 DEPFLAGS = -MMD -MF $(@:.o=.d)
 
 NAME = philo
